@@ -267,7 +267,7 @@ exports[`Stack snapshot test 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a20e3d07d3f2081d66c7f11708c5b8eda3a81d4f14bc3efb1745fdf3a88d78b8.zip",
+          "S3Key": "5f5e752accdab46f02a2ff4cdb712bfd6dc600fdc800e96269fc6deeefa5ecf5.zip",
         },
         "Environment": {
           "Variables": {
@@ -384,6 +384,35 @@ exports[`Stack snapshot test 1`] = `
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
+    "PlaySongLambdaFunctionAllowEventBridgeRuleInvoke4F12E0E6": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PlaySongLambdaFunctionE7283A9C",
+            "Arn",
+          ],
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:aws:events:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":rule/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
     "PlaySongLambdaFunctionE7283A9C": {
       "DependsOn": [
         "PlaySongLambdaFunctionServiceRole09620CA4",
@@ -393,7 +422,7 @@ exports[`Stack snapshot test 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f0c2ef4508dd8d59d0712a0d91b603cc4aff6e4a1c7a5ef762b9a9e18b6f5fa9.zip",
+          "S3Key": "d46e522f35debbc5b99b755ad77ab7538afae290a2779010c98bf2e47bf3d5d8.zip",
         },
         "Handler": "index.handler",
         "Role": {
