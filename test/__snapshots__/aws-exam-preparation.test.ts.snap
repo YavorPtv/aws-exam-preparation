@@ -1,0 +1,515 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stack snapshot test 1`] = `
+{
+  "Outputs": {
+    "AddSongApiEndpoint33801086": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "AddSongApi6C726511",
+            },
+            ".execute-api.",
+            {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "AddSongApiDeploymentStageprodA6A19AD7",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AddSongApi6C726511": {
+      "Properties": {
+        "Name": "AddSongApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "AddSongApiAccountF6FE22CD": {
+      "DeletionPolicy": "Retain",
+      "DependsOn": [
+        "AddSongApi6C726511",
+      ],
+      "Properties": {
+        "CloudWatchRoleArn": {
+          "Fn::GetAtt": [
+            "AddSongApiCloudWatchRole69E109A8",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "AddSongApiCloudWatchRole69E109A8": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "AddSongApiDeploymentCD40EEE311946a394f0c399f9e6f16077b5ed238": {
+      "DependsOn": [
+        "AddSongApisongPOSTFC10C8DE",
+        "AddSongApisong83485911",
+      ],
+      "Metadata": {
+        "aws:cdk:do-not-refactor": true,
+      },
+      "Properties": {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": {
+          "Ref": "AddSongApi6C726511",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "AddSongApiDeploymentStageprodA6A19AD7": {
+      "DependsOn": [
+        "AddSongApiAccountF6FE22CD",
+      ],
+      "Properties": {
+        "DeploymentId": {
+          "Ref": "AddSongApiDeploymentCD40EEE311946a394f0c399f9e6f16077b5ed238",
+        },
+        "RestApiId": {
+          "Ref": "AddSongApi6C726511",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "AddSongApisong83485911": {
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "AddSongApi6C726511",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "song",
+        "RestApiId": {
+          "Ref": "AddSongApi6C726511",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "AddSongApisongPOSTApiPermissionMyTestStackAddSongApiD4C857BFPOSTsong29FEECC6": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AddSongLambdaFunction911AE2B6",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "AddSongApi6C726511",
+              },
+              "/",
+              {
+                "Ref": "AddSongApiDeploymentStageprodA6A19AD7",
+              },
+              "/POST/song",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "AddSongApisongPOSTApiPermissionTestMyTestStackAddSongApiD4C857BFPOSTsongBD4D520F": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AddSongLambdaFunction911AE2B6",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "AddSongApi6C726511",
+              },
+              "/test-invoke-stage/POST/song",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "AddSongApisongPOSTFC10C8DE": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AddSongLambdaFunction911AE2B6",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": {
+          "Ref": "AddSongApisong83485911",
+        },
+        "RestApiId": {
+          "Ref": "AddSongApi6C726511",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "AddSongLambdaFunction911AE2B6": {
+      "DependsOn": [
+        "AddSongLambdaFunctionServiceRoleDefaultPolicy1576E6F2",
+        "AddSongLambdaFunctionServiceRole7B278AB7",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "a20e3d07d3f2081d66c7f11708c5b8eda3a81d4f14bc3efb1745fdf3a88d78b8.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "TABLE_NAME": {
+              "Ref": "SongTableE9BB44CE",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "AddSongLambdaFunctionServiceRole7B278AB7",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AddSongLambdaFunctionServiceRole7B278AB7": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "AddSongLambdaFunctionServiceRoleDefaultPolicy1576E6F2": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "SongTableE9BB44CE",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "SongTableE9BB44CE",
+                          "Arn",
+                        ],
+                      },
+                      "/index/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AddSongLambdaFunctionServiceRoleDefaultPolicy1576E6F2",
+        "Roles": [
+          {
+            "Ref": "AddSongLambdaFunctionServiceRole7B278AB7",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "BoykoSubscription0B495029": {
+      "Properties": {
+        "Endpoint": "yavorpetrakiev@gmail.com",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "BoykoTopic6EBA29D1",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
+    "BoykoTopic6EBA29D1": {
+      "Type": "AWS::SNS::Topic",
+    },
+    "CoverPhotoBucketD5D00E6D": {
+      "DeletionPolicy": "Retain",
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "PlaySongLambdaFunctionE7283A9C": {
+      "DependsOn": [
+        "PlaySongLambdaFunctionServiceRole09620CA4",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "f0c2ef4508dd8d59d0712a0d91b603cc4aff6e4a1c7a5ef762b9a9e18b6f5fa9.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "PlaySongLambdaFunctionServiceRole09620CA4",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs22.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "PlaySongLambdaFunctionServiceRole09620CA4": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SongTableE9BB44CE": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "PK",
+            "AttributeType": "S",
+          },
+          {
+            "AttributeName": "SK",
+            "AttributeType": "S",
+          },
+          {
+            "AttributeName": "artist",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "Arist-Index",
+            "KeySchema": [
+              {
+                "AttributeName": "artist",
+                "KeyType": "HASH",
+              },
+            ],
+            "Projection": {
+              "ProjectionType": "ALL",
+            },
+          },
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "PK",
+            "KeyType": "HASH",
+          },
+          {
+            "AttributeName": "SK",
+            "KeyType": "RANGE",
+          },
+        ],
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
